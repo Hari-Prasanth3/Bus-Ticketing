@@ -1,28 +1,28 @@
-import User from "../models/userModel";
+import User from '../models/userModel.js';
 
-//checking user exist or not
 const authenticateUser = async (email, password) => {
     const user = await User.findOne({email});
-    if (!user){
-        throw new Error("User not Found")
-    }
-
-    const matchPassword = await user.matchPassword(password);
-    if(matchPassword){
-        return user;
-    } else {
-        throw new Error("Invalid email or Password");
+  
+    if (user && (await user.matchPassword(password))){
+        return user
     }
 }
-//new user
-const createUser = async (name, email, password) => {
-    const user = await User.findOne({email});
+//checking user if user already exist or not
+const checkUser = async (email)=> {
+    const user = await User.findOne({email})
+
     if(user){
-        throw new Error("User already Exists");
+        return user
     }
-    user = new User({name, email, password});
-    await user.save();
+}
+//create new user
+const createUser = async (name, email, password, isAdmin) => {
+    const user = await User.create({
+        name,email,password, isAdmin
+    });
+    return user
 }
 
 
-export {authenticateUser, createUser}
+
+export {authenticateUser, createUser, checkUser}

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const busSchema = new mongoose.Schema({
-    userId: {
+    user_id: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "User"
@@ -16,8 +16,8 @@ const busSchema = new mongoose.Schema({
         required: true,
     },
     isSleeper: {
-        type: String,
-        required: true,
+        type: Boolean,
+        // required: true,
         default: false
     },
 },{

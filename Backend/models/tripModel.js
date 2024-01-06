@@ -8,24 +8,27 @@ const bookSchema = mongoose.Schema({
     },
    seatNo: {
     type: Number,
-    required: true,
    },
 },{
     timestamps: true,
 });
 
 const tripSchema = new mongoose.Schema({
-    //tripID primary key
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
+    // //tripID primary key
+    // userId: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     required: true,
+    //     ref: "User"
+    // },
+    // //busID Foreign key
+    // busId: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     required: true,
+    //     ref: "Bus"
+    // },
+    busNumber: {
+        type: String,
         required: true,
-        ref: "User"
-    },
-    //busID Foreign key
-    busId: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: "Bus"
     },
     availableSeats: {
         type: Number,
@@ -45,18 +48,22 @@ const tripSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    date: {
-        type:Date,
-        required: true,
-    },
     departureTime: {
-        type: Date,
+        type: String,
         required: true,
     },
     arrivalTime: {
+        type: String,
+        required: true,
+    },
+    date: {
         type: Date,
         required: true,
     },
+    price: {
+        type: Number,
+        required: true,
+    }
 },{
     timestamps: true
 });

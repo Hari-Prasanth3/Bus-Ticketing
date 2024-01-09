@@ -7,7 +7,7 @@ const createBus = asyncHandler(async (req, res)=> {
         const {busNumber, busSeats, isSleeper} = req.body
         if(!busNumber || !busSeats){
             return res.status(400).json({
-                message: "Invaild User data"
+                message: "Invalid User data"
             })
         }
         const checkBus = await checkBusExists(busNumber)

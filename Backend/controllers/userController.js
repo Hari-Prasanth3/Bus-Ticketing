@@ -1,4 +1,4 @@
-import asyncHandler from "../middleware/asyncHandler.js";
+import asyncHandler from "../middleWare/asyncHandler.js";
 import generateToken from "../utils/generateToken.js";
 import { authenticateUser, createUser } from "../services/service.js";
 import User from '../models/userModel.js'
@@ -63,4 +63,20 @@ const registerUser = asyncHandler(async (req, res) => {
     
 });
 
-export {authUser, registerUser}
+const getUserById = async (req, res) => {
+	try {
+		const user = await User.findById(req.params.id);
+        // console.log(user);
+
+		if (user) {
+            return res.status(200).json(user)
+        } else {
+            return res.status(404).json({ message: 'User not found' });
+        }
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).send('Server Error');
+	}
+};
+
+export {authUser, registerUser,getUserById}

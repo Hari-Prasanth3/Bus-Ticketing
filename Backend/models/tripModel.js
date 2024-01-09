@@ -1,31 +1,12 @@
 import mongoose from "mongoose";
 
-const bookSchema = mongoose.Schema({
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: "User"
-    },
-   seatNo: {
-    type: Number,
-   },
-},{
-    timestamps: true,
-});
+
 
 const tripSchema = new mongoose.Schema({
-    // //tripID primary key
-    // userId: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     required: true,
-    //     ref: "User"
-    // },
-    // //busID Foreign key
-    // busId: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     required: true,
-    //     ref: "Bus"
-    // },
+    trip_Id: {
+        type: String,
+        required: true,
+     },
     busNumber: {
         type: String,
         required: true,
@@ -34,7 +15,7 @@ const tripSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    bookedSeats: [bookSchema],
+    bookedSeats: [{type: Number}],
     date: {
         type: Date,
         required: true

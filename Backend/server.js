@@ -9,6 +9,7 @@ connectDB()
 import userRoutes from './routes/userRoutes.js'
 import  busRoutes from './routes/busRoutes.js'
 import  tripRoutes from './routes/tripRoutes.js'
+import ticketRoutes from './routes/ticketRoutes.js'
 import cookieParser from 'cookie-parser';
 
 
@@ -27,4 +28,6 @@ app.listen(port, ()=> {
 app.use('/api/users', userRoutes)
 app.use('/api/Buses', busRoutes)
 app.use('/api/Trips', tripRoutes)
+app.use('/api/Tickets', ticketRoutes)
+
 

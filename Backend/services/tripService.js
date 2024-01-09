@@ -8,8 +8,7 @@ const addTrip = async (
         arrivalTime,
         origin,
         destination,
-        price
-) => {
+        price) => {
     const newTrip = await Trip.create({
         busNumber,
         availableSeats,
@@ -22,5 +21,9 @@ const addTrip = async (
     });
     return newTrip
 }
+const getTrip = async(trip_Id) => {
+    const trip = await Trip.findById(trip_Id)
+    return trip
 
-export { addTrip }
+}
+export { addTrip,getTrip }

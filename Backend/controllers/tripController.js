@@ -1,5 +1,5 @@
 import Trip from '../models/tripModel.js';
-import { addTrip } from '../services/tripService.js';
+import { addTrip,getTrip } from '../services/tripService.js';
 
 const createTrip = async (req,res) => {
     const {
@@ -14,15 +14,14 @@ const createTrip = async (req,res) => {
     } = req.body
 	try {
 		const existingTrip = await Trip.findOne({
-            $and: [
-                {date: date},
-                {departureTime: {$lte: arrivalTime}},
-                {arrivalTime: {$gte: departureTime}}
-            ]
+                busNumber: busNumber,
+                date: date,
         });
 		if(existingTrip){
 			return res.status(400).json({message: "Trip already exists"})
-		}
+		} else {
+            console.log("hello")
+        }
 
         const trip = await addTrip(
             busNumber,
@@ -51,4 +50,42 @@ const createTrip = async (req,res) => {
 	}
 }
 
-export { createTrip }
+const getTripById = async (req, res) => {
+	try {
+		const trip = await getTrip(req.params.id );
+
+		if (trip) {
+            return res.status(200).json(trip)
+        } else {
+            return res.status(404).json({ message: 'Trip not found' });
+        }
+	} catch (error) {
+		console.error(error.message);
+		res.status(500).json({message: "Invalid Trip ID"});
+	}
+};
+
+const SearchBus = async (req,res) => {
+    let origin = req.query.from;
+    let destination = req.query.to;
+    let date = req.query.date;
+
+    if (!origin || !destination || !date) {
+        return res.status(400).json({ error: "Invalid parameters" });
+    }
+
+    const trip = await Trip.find({
+        origin: origin,
+        destination: destination,
+        date: date
+    })
+console.log(trip);
+    if (!trip.length) {
+        return res.status(404).json({ error: "No available buses" });
+    } else {
+        return res.status(200).json(trip)
+    }
+}
+
+
+export { createTrip, SearchBus,getTripById}

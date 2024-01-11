@@ -1,7 +1,6 @@
 import asyncHandler from "../middleWare/asyncHandler.js";
 import generateToken from "../utils/generateToken.js";
-import { authenticateUser, createUser } from "../services/service.js";
-import User from '../models/userModel.js'
+import { authenticateUser, createUser,getUser ,CheckUser} from "../services/service.js";
 
 // @desc Auth & get token
 // @route POST /api/users/login
@@ -37,7 +36,7 @@ const registerUser = asyncHandler(async (req, res) => {
         res.status(400).json({ message: "Invalid user data"})
     }
     try {
-        const userExists = await checkUser(email)
+        const userExists = await CheckUser(email)
 
         if (userExists){
             return await res.status(400).json({
@@ -63,20 +62,62 @@ const registerUser = asyncHandler(async (req, res) => {
     
 });
 
-const getUserById = async (req, res) => {
-	try {
-		const user = await User.findById(req.params.id);
-        // console.log(user);
+// const getUserById = async (req, res) => {
+// 	try {
+// 		const user = await User.findById(req.params.id);
+//         // console.log(user);
 
-		if (user) {
-            return res.status(200).json(user)
+// 		if (user) {
+//             return res.status(200).json(user)
+//         } else {
+//             return res.status(404).json({ message: 'User not found' });
+//         }
+// 	} catch (err) {
+// 		console.error(err.message);
+// 		res.status(500).json({message: "Invalid User Id"});
+// 	}
+// };
+// const registerUser = asyncHandler(async (req, res) => {
+//     const { name, email, password, isAdmin } = req.body;
+
+//     try {
+//         const user = await createUser(name, email, password, isAdmin);
+
+//             generateToken(res, user._id)
+
+//             res.status(201).json({
+//                 _id: user._id,
+//                 name: user.name,
+//                 email: user.email,
+//                 isAdmin: user.isAdmin,
+//             })
+//     } catch (error) {
+//         res.status(401).json({
+//             message: error.message
+//         })
+//     } 
+// });
+
+// @desc Get User by Id
+// @route GET /api/users/:id
+const getUserById = async(req, res) => {
+    try {
+        const user = await getUser(req.params.id)
+        if(user){
+            res.status(200).json(user)
         } else {
-            return res.status(404).json({ message: 'User not found' });
+            res.status(404).json({
+                message: "User Not Found"
+            })
         }
-	} catch (err) {
-		console.error(err.message);
-		res.status(500).send('Server Error');
-	}
-};
+    } catch (error) {
+        res.status(400).json({
+            message: "Invaild User ID"
+        })
+    }
+    
+}
+
+
 
 export {authUser, registerUser,getUserById}

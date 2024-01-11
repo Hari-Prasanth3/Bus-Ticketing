@@ -3,10 +3,10 @@ import mongoose from "mongoose";
 
 
 const tripSchema = new mongoose.Schema({
-    trip_Id: {
-        type: String,
-        required: true,
-     },
+    // trip_Id: {
+    //     type: String,
+    //     required: true,
+    //  },
     busNumber: {
         type: String,
         required: true,

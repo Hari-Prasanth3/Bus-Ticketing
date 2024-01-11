@@ -1,7 +1,13 @@
 import Trip from '../models/tripModel.js';
-import { addTrip,getTrip } from '../services/tripService.js';
-
+import { addTrip, getTrip } from '../services/tripService.js';
+import { searchValidation, tripValidation } from '../middleWare/validateMiddleWare.js';
 const createTrip = async (req,res) => {
+    const { error, value } = await tripValidation(req.body)
+    if(error){
+        return res.status(400).json({
+            message : error.message
+        })
+    }
     const {
         busNumber,
         availableSeats,
@@ -20,7 +26,7 @@ const createTrip = async (req,res) => {
 		if(existingTrip){
 			return res.status(400).json({message: "Trip already exists"})
 		} else {
-            console.log("hello")
+            // console.log("hello")
         }
 
         const trip = await addTrip(
@@ -52,7 +58,7 @@ const createTrip = async (req,res) => {
 
 const getTripById = async (req, res) => {
 	try {
-		const trip = await getTrip(req.params.id );
+		const trip = await Trip.findById(req.params.id );
 
 		if (trip) {
             return res.status(200).json(trip)
@@ -69,9 +75,12 @@ const SearchBus = async (req,res) => {
     let origin = req.query.from;
     let destination = req.query.to;
     let date = req.query.date;
-
-    if (!origin || !destination || !date) {
-        return res.status(400).json({ error: "Invalid parameters" });
+    const { error, value } = await searchValidation(req.query)
+    if(error){
+        console.log(error)
+        return res.status(401).json({
+            message : error.message
+        })
     }
 
     const trip = await Trip.find({

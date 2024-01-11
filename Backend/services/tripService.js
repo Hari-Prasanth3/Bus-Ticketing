@@ -21,9 +21,14 @@ const addTrip = async (
     });
     return newTrip
 }
-const getTrip = async(trip_Id) => {
-    const trip = await Trip.findById(trip_Id)
-    return trip
+// const getTrip = async(trip_Id) => {
+//     const trip = await Trip.findById(trip_Id)
+//     console.log(trip);
+//     return trip
 
-}
+// }
+const getTrip = async (trip_Id) => {
+    const trip = await Trip.findById({ trip_Id });
+    return trip
+  }
 export { addTrip,getTrip }

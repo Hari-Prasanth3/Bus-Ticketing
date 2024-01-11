@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import asyncHandler from "../middleWare/asyncHandler.js";
 import User from '../models/userModel.js';
+import Ticket from '../models/ticketModel.js';
 
 // Protect routes
 const protect = asyncHandler(async (req, res, next) => {
@@ -50,5 +51,37 @@ const userId = (req) => {
         return null;
     }
 };
+// Get User
+const checkUser = (req,res,next) => {
+    const user_id = userId(req)
+    const id = req.params.id
+    console.log(user_id, id)
+    if(id === user_id){
+        next();
+    } else {
+        return res.status(404).json({
+            message: "User ID Not Found"
+        })
+    }
+}
+//get check Auth
+const checkAuthUser = async(req,res,next) => {
+    const user_id = userId(req)
+    const ticket = req.params.id
 
-export { protect, admin,userId };
+    try {
+        const tickets = await Ticket.findById(ticket)
+        
+        if(!tickets){
+            return res.status(404).json({message: "Ticket not found"})
+        }
+        if(tickets.user_id != user_id){
+            return res.status(404).json({message: "User ticket not found"})
+        } else {
+            next();
+        }
+    } catch (error) {
+        return res.status(404).json({message: "Invalid Ticket Id"})
+    }
+}
+export { protect, admin,userId ,checkUser,checkAuthUser};

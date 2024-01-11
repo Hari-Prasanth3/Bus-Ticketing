@@ -1,13 +1,17 @@
 import { userId } from "../middleWare/authMiddleWare.js";
 import { UpdateTrip, cancel, checkSeats, createTicket, findTicket, findTrip, getTickets, update } from '../services/ticketService.js';
-import Ticket from "../models/ticketModel.js";
-import Trip from '../models/tripModel.js';
+import { ticketValidation } from "../middleWare/validateMiddleWare.js";
 
 const BookTrip = async (req, res) => {
     const { passengers} = req.body;
     const { trip_id } = req.params;
 
     try {
+        const { error, value } = await ticketValidation(req.body)
+        if(error){
+            return res.status(400).json({
+                message: error.message
+            })}
         const trip = await findTrip(trip_id);
 
     if (!trip) {
@@ -57,7 +61,7 @@ const BookTrip = async (req, res) => {
     })
     } catch (error) {
         console.log(error)
-        res.status(500).json({ message : error.message })
+        res.status(500).json({ message : "Invalid trip Id"})
     } 
 }
 

@@ -8,7 +8,14 @@ const authenticateUser = async (email, password) => {
     }
 }
 //checking user if user already exist or not
-const checkUser = async (email)=> {
+const getUser = async (id)=> {
+    const user = await User.findById(id)
+
+    if(user){
+        return user
+    }
+}
+const CheckUser = async (email)=> {
     const user = await User.findOne({email})
 
     if(user){
@@ -25,4 +32,4 @@ const createUser = async (name, email, password, isAdmin) => {
 
 
 
-export {authenticateUser, createUser, checkUser}
+export {authenticateUser, createUser, getUser,CheckUser}

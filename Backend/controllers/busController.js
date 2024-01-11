@@ -1,16 +1,18 @@
 import asyncHandler from "../middleWare/asyncHandler.js";
-import { addBus, checkBusExists } from '../services/busService.js';
+// import { addBus, checkBusExists } from '../services/busService.js';
+import Bus from '../models/busModel.js';
 import { userId } from "../middleWare/authMiddleWare.js";
-
+import { busValidation } from "../middleWare/busMiddleWare.js";
 const createBus = asyncHandler(async (req, res)=> {
     try {
         const {busNumber, busSeats, isSleeper} = req.body
-        if(!busNumber || !busSeats){
-            return res.status(400).json({
-                message: "Invalid User data"
-            })
+        const { error, value } = busValidation(req.body)
+        if(error){
+         return res.status(400).json({
+             message: error.message
+         })
         }
-        const checkBus = await checkBusExists(busNumber)
+     const checkBus = await checkBusExists(busNumber)
         if(checkBus){
             return res.status(400).json({
                 message: "Bus already Exists"
@@ -31,5 +33,16 @@ console.log(user_id);
         res.status(500).json({ message: error.message })
     }
 })
+const addBus = async (user_id, busNumber, busSeats, isSleeper) =>{
+    const newBus = await Bus.create({
+        user_id, busNumber, busSeats, isSleeper
+    });
+    return newBus
+}
 
-export { createBus }
+const checkBusExists = async (busNumber) => {
+    const bus = await Bus.findOne({busNumber});
+    return bus
+}
+
+export { createBus,addBus, checkBusExists}

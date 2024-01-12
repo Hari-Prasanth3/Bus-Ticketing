@@ -6,7 +6,7 @@ import { busValidation } from "../middleWare/busMiddleWare.js";
 const createBus = asyncHandler(async (req, res)=> {
     try {
         const {busNumber, busSeats, isSleeper} = req.body
-        const { error, value } = busValidation(req.body)
+        const { error } = busValidation(req.body)
         if(error){
          return res.status(400).json({
              message: error.message

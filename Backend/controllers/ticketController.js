@@ -7,11 +7,12 @@ const BookTrip = async (req, res) => {
     const { trip_id } = req.params;
 
     try {
-        const { error, value } = await ticketValidation(req.body)
+        const { error } = await ticketValidation(req.body)
         if(error){
             return res.status(400).json({
                 message: error.message
             })}
+            
         const trip = await findTrip(trip_id);
 
     if (!trip) {
@@ -29,14 +30,13 @@ const BookTrip = async (req, res) => {
     const totalPrice = passengers.length * trip.price;
 
     const seatNumbers = passengers.map(passenger => passenger.seatNo);
-
+     //check seat exists or not?
     const seatExists = await checkSeats(trip_id, seatNumbers)
 
     if (seatExists) {
         return res.status(400).json({ error: 'Seat already booked' });
     }
-    
-    // const user_id = req.user._id
+    //create ticket
     const ticket = await createTicket(user_id, trip_id, busNumber, bookingDate, passengers, numberOfSeats, date, departureTime, arrivalTime, origin, destination, totalPrice)
     
     const updateTrip = await UpdateTrip(trip_id, numberOfSeats, seatNumbers);

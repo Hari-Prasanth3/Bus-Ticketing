@@ -13,7 +13,7 @@ const checkBusOwner = async (req, res, next) => {
 			if (req.user && req.user._id.toString() === bus.user_id.toString()){
 				next();
 			} else {
-				res.status(403).json({ message: "User is not the owner of the Bus"})
+				res.status(403).json({ message: "User is not the owner of Bus"})
 			}
 		}
 	} catch (error) {

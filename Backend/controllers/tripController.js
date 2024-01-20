@@ -1,5 +1,6 @@
 import { addTrip, checkTrip, getTrip, searchTrip } from '../services/tripService.js';
 import { searchValidation, tripValidation } from '../middleWare/validateMiddleWare.js';
+import Trip from '../models/tripModel.js';
 
 const createTrip = async (req,res) => {
     const { error, value } = await tripValidation(req.body)

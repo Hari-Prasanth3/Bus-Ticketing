@@ -1,4 +1,4 @@
-import { userId } from "../middleware/authMiddleware.js";
+import { userId } from "../middleWare/authMiddleWare.js";
 import { UpdateTrip, cancel, checkSeats, createTicket, findTicket, findTrip, getTickets, update } from '../services/ticketService.js';
 
 const BookTrip = async (req, res) => {

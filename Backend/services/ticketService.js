@@ -58,6 +58,7 @@ const findTicket = async (id) => {
 }
 
 const getTickets = async (id) => {
+  console.log(id);
   const tickets = await Ticket.find({ user_id: id });
   return tickets
 }

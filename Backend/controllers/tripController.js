@@ -1,6 +1,6 @@
-import Trip from '../models/tripModel.js';
-import { addTrip, getTrip } from '../services/tripService.js';
+import { addTrip, checkTrip, getTrip, searchTrip } from '../services/tripService.js';
 import { searchValidation, tripValidation } from '../middleWare/validateMiddleWare.js';
+
 const createTrip = async (req,res) => {
     const { error, value } = await tripValidation(req.body)
     if(error){
@@ -8,6 +8,7 @@ const createTrip = async (req,res) => {
             message : error.message
         })
     }
+
     const {
         busNumber,
         availableSeats,
@@ -19,15 +20,11 @@ const createTrip = async (req,res) => {
         price
     } = req.body
 	try {
-		const existingTrip = await Trip.findOne({
-                busNumber: busNumber,
-                date: date,
-        });
+        const existingTrip = await checkTrip(busNumber, date)
+
 		if(existingTrip){
 			return res.status(400).json({message: "Trip already exists"})
-		} else {
-            // console.log("hello")
-        }
+		}
 
         const trip = await addTrip(
             busNumber,
@@ -58,18 +55,23 @@ const createTrip = async (req,res) => {
 
 const getTripById = async (req, res) => {
 	try {
-		const trip = await Trip.findById(req.params.id );
-
+        const trip = await getTrip(req.params.id)
+        
 		if (trip) {
-            return res.status(200).json(trip)
+            res.status(200).json(trip)
         } else {
-            return res.status(404).json({ message: 'Trip not found' });
+            res.status(404).json({ 
+                message: 'Trip not found'
+            });
         }
 	} catch (error) {
 		console.error(error.message);
-		res.status(500).json({message: "Invalid Trip ID"});
+		res.status(500).json({
+            message : "Invalid Trip ID"
+        });
 	}
 };
+
 
 const SearchBus = async (req,res) => {
     let origin = req.query.from;
@@ -83,18 +85,13 @@ const SearchBus = async (req,res) => {
         })
     }
 
-    const trip = await Trip.find({
-        origin: origin,
-        destination: destination,
-        date: date
-    })
-console.log(trip);
+    const trip = await searchTrip(origin, destination, date)
+
     if (!trip.length) {
-        return res.status(404).json({ error: "No available buses" });
+        return res.status(404).json({ message: "No available buses" });
     } else {
         return res.status(200).json(trip)
     }
 }
 
-
-export { createTrip, SearchBus,getTripById}
+export { createTrip, getTripById, SearchBus }

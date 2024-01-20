@@ -21,14 +21,28 @@ const addTrip = async (
     });
     return newTrip
 }
-// const getTrip = async(trip_Id) => {
-//     const trip = await Trip.findById(trip_Id)
-//     console.log(trip);
-//     return trip
+const searchTrip = async(origin,destination,date)=> {
+const trip = await Trip.find({
+    origin: origin,
+    destination: destination,
+    date: date
+})
+return trip
+}
+const checkTrip = async (busNumber, date) => {
+    const existingTrip = await Trip.findOne({
+        busNumber: busNumber,
+        date: date,
+    });
+    return existingTrip
+}
 
-// }
 const getTrip = async (trip_Id) => {
-    const trip = await Trip.findById({ trip_Id });
+    const trip = await Trip.findById( trip_Id );
     return trip
   }
-export { addTrip,getTrip }
+// const getTrip = async (trip_Id) => {
+//     const trip = await Trip.findById(trip_Id.toString());
+//     return trip;
+//   }
+export { addTrip,getTrip ,searchTrip,checkTrip}

@@ -59,7 +59,7 @@ const checkUser = (req,res,next) => {
     if(id === user_id){
         next();
     } else {
-        return res.status(404).json({
+        return res.status(404).json({ 
             message: "User ID Not Found"
         })
     }

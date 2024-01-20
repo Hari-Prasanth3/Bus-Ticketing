@@ -29,7 +29,7 @@ const ticketSchema = new mongoose.Schema({
         rel: "Bus"
     },
     bookingDate: {
-        type: Date,
+        type: String,
         required: true
     },
     passengers: [passengerSchema],

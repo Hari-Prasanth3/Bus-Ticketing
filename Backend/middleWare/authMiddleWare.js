@@ -4,7 +4,7 @@ import User from '../models/userModel.js';
 import Ticket from '../models/ticketModel.js';
 
 // Protect routes
-const protect = asyncHandler(async (req, res, next) => {
+const protect = (async (req, res, next) => {
     let token;
 
     token = req.cookies.jwt;

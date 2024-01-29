@@ -30,17 +30,9 @@ const authUser = async (req, res) => {
 // @access Public
 const registerUser = async (req, res) => {
     const { name, email, password, isAdmin } = req.body;
-    // if(!name || !email || !password){
-    //     res.status(400).json({ message: "Invalid user data"})
-    // }
+   
     try {
-        // const userExists = await CheckUser(email)
-
-        // if (userExists){
-        //     return await res.status(400).json({
-        //         message : "User already Exists"
-        //     })
-        // }
+      
         const user = await createUser(name, email, password, isAdmin);
 
             generateToken(res, user._id)

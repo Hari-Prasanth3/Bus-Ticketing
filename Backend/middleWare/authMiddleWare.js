@@ -56,11 +56,18 @@ const checkUser = (req,res,next) => {
     const user_id = userId(req)
     const id = req.params.id
     console.log(user_id, id)
-    if(id === user_id){
-        next();
-    } else {
+     if(id){
+        try{
+            id === user_id
+            next()
+    } catch {
         return res.status(404).json({ 
             message: "User ID Not Found"
+        })
+    }
+} else{
+        res.status(400).json({
+            message: "Invalid User ID"
         })
     }
 }

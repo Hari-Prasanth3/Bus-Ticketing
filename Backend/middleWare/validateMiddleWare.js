@@ -52,15 +52,21 @@ const ticketValidation =  (req, res, next) => {
     }
 }
 
-const searchValidation = (data) => {
+const searchValidation = (req, res ,next) => {
     const schema = Joi.object({
         from : Joi.string().required(),
         to : Joi.string().required(),
         date : Joi.date().required()
     });
-    return schema.validate(data)
+    const { error, value } = schema.validate(req.query)
+    if(error){
+        return res.status(400).json({
+            message: error.message
+        })
+    } else {
+        next();
+    }
 }
-
 const tripValidation = (data) => {
     const schema = Joi.object({
         busNumber : Joi.string().required(),

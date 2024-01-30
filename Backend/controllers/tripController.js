@@ -78,7 +78,7 @@ const SearchBus = async (req,res) => {
     let origin = req.query.from;
     let destination = req.query.to;
     let date = req.query.date;
-    const { error, value } = await searchValidation(req.query)
+    const { error, value } = await(req.query)
     if(error){
         console.log(error)
         return res.status(401).json({
@@ -87,6 +87,7 @@ const SearchBus = async (req,res) => {
     }
 
     const trip = await searchTrip(origin, destination, date)
+    console.log(trip)
 
     if (!trip.length) {
         return res.status(404).json({ message: "No available buses" });

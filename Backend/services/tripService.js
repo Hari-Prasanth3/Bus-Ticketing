@@ -22,9 +22,10 @@ const addTrip = async (
     return newTrip
 }
 const searchTrip = async(origin,destination,date)=> {
+    console.log(origin, destination, date)
 const trip = await Trip.find({
-    origin: origin,
-    destination: destination,
+    origin: {$regex: origin, $options : 'i'},
+    destination: {$regex: destination, $options: 'i'},
     date: date
 })
 return trip

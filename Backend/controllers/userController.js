@@ -1,5 +1,6 @@
 import generateToken from "../utils/generateToken.js";
 import { authenticateUser, createUser,getUser } from "../services/service.js";
+
 // @desc Auth & get token
 // @route POST /api/users/login
 // @access Public
@@ -45,7 +46,7 @@ const registerUser = async (req, res) => {
             })
     } catch (error) {
         res.status(401).json({
-            message: error.message
+            message: "user already exists"
         })
     }
 };

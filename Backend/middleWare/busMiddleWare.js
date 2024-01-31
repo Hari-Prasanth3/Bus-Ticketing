@@ -30,6 +30,18 @@ const busValidation = (data) => {
 	return busSchema.validate(data)
 }
 
+const checkSeatsNumber = async (req,res,next) => {
+	const { busNumber, availableSeats } = req.body;
+	const bus = await Bus.findOne({busNumber})
+
+	if(bus.busSeats < availableSeats){
+		return res.status(404).json({
+			message: `Available Seats is not Equal to ${bus.busSeats}`
+		})
+	}
+	next();
+}
 
 
-export { checkBusOwner, busValidation }
+
+export { checkBusOwner, busValidation,checkSeatsNumber }

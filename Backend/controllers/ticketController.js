@@ -23,6 +23,7 @@ const BookTrip = async (req, res) => {
         const totalPrice = passengers.length * trip.price;
 
         const seatNumbers = passengers.map(passenger => passenger.seatNo);
+        
 
         const seatExists = await checkSeats(trip_id, seatNumbers)
 

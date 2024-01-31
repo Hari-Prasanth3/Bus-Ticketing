@@ -22,8 +22,8 @@ import {  addTrip,checkTrip,getTrip,searchTrip} from '../../services/tripService
           date: '2024-01-15',
           departureTime: '08:00 AM',
           arrivalTime: '12:00 PM',
-          origin: 'CityA',
-          destination: 'CityB',
+          origin: 'coimbatore',
+          destination: 'chennai',
           price: 500,
         };
   
@@ -118,8 +118,8 @@ import {  addTrip,checkTrip,getTrip,searchTrip} from '../../services/tripService
         const result = await searchTrip(origin, destination, date);
   
         expect(Trip.find).toHaveBeenCalledWith({
-          origin:  origin ,
-          destination:   destination ,
+          origin: { $regex: origin, $options: 'i' },
+          destination: { $regex: destination, $options: 'i' },
           date: date,
         });
   

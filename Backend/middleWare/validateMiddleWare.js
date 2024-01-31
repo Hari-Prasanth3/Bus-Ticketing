@@ -1,4 +1,7 @@
-import Joi from 'joi';
+import JoiBase from 'joi';
+import JoiDate from '@hapi/joi-date'
+
+const Joi = JoiBase.extend(JoiDate)
 // Register User
 const registerValidation = (req, res, next) => {
     const schema = Joi.object({
@@ -72,8 +75,8 @@ const tripValidation = (data) => {
         busNumber : Joi.string().required(),
         availableSeats : Joi.number().required(),
         date : Joi.date().required(),
-        departureTime : Joi.string().isoDate('hh:mm').required(),
-        arrivalTime : Joi.string().isoDate('hh:mm').required(),
+        departureTime : Joi.date().format('HH:mm').required(),
+        arrivalTime : Joi.date().format('HH:mm').required(),
         origin : Joi.string().required(),
         destination : Joi.string().required(),
         price : Joi.number().integer().required()

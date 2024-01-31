@@ -72,8 +72,8 @@ const tripValidation = (data) => {
         busNumber : Joi.string().required(),
         availableSeats : Joi.number().required(),
         date : Joi.date().required(),
-        departureTime : Joi.string().required(),
-        arrivalTime : Joi.string().required(),
+        departureTime : Joi.string().isoDate('hh:mm').required(),
+        arrivalTime : Joi.string().isoDate('hh:mm').required(),
         origin : Joi.string().required(),
         destination : Joi.string().required(),
         price : Joi.number().integer().required()

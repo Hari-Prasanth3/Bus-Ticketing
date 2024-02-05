@@ -42,8 +42,5 @@ const getTrip = async (trip_Id) => {
     const trip = await Trip.findById( trip_Id );
     return trip
   }
-// const getTrip = async (trip_Id) => {
-//     const trip = await Trip.findById(trip_Id.toString());
-//     return trip;
-//   }
+
 export { addTrip,getTrip ,searchTrip,checkTrip}

@@ -1,14 +1,6 @@
 import { addTrip, checkTrip, getTrip, searchTrip } from '../services/tripService.js';
-import { searchValidation, tripValidation } from '../middleWare/validateMiddleWare.js';
-import Trip from '../models/tripModel.js';
 
 const createTrip = async (req,res) => {
-    const { error, value } = await tripValidation(req.body)
-    if(error){
-        return res.status(400).json({
-            message : error.message
-        })
-    }
 
     const {
         busNumber,
@@ -78,16 +70,9 @@ const SearchBus = async (req,res) => {
     let origin = req.query.from;
     let destination = req.query.to;
     let date = req.query.date;
-    const { error, value } = await(req.query)
-    if(error){
-        console.log(error)
-        return res.status(401).json({
-            message : error.message
-        })
-    }
 
     const trip = await searchTrip(origin, destination, date)
-    console.log(trip)
+    // console.log(trip)
 
     if (!trip.length) {
         return res.status(404).json({ message: "No available buses" });

@@ -15,12 +15,10 @@ const protect = (async (req, res, next) => {
             next();
         } catch (error) {
             console.log(error);
-            res.status(401);
-            throw new Error('Not authorized, token failed')
+            res.status(401).json({message:'Not authorized, token failed'})
         }
     } else {
-        res.status(401);
-        throw new Error('Not authorized, no token')
+        res.status(401).json({message:'Not authorized, no token'})
     }
 })
 
@@ -35,26 +33,26 @@ const admin = (req, res, next) => {
     }
 };
 // Get user Id
-const userId = (req) => {
-    const token = req.cookies.jwt;
+// const userId = (req) => {
+//     const token = req.cookies.jwt;
 
-    if (!token) {
-        return null;
-    }
+//     if (!token) {
+//         return null;
+//     }
 
-    try {
-        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-        return decodedToken.userId;
-    } catch (error) {
-        console.log('Error verifying JWT:', error);
-        return null;
-    }
-};
+//     try {
+//         const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+//         return decodedToken.userId;
+//     } catch (error) {
+//         console.log('Error verifying JWT:', error);
+//         return null;
+//     }
+// };
 // Get User
 const checkUser = async(req,res,next) => {
-    const user_id = userId(req)
+    const user_id = req.user._id
     const id = req.params.id
-    console.log(user_id, id)
+    // console.log(user_id, id)
     try {
         const user = await User.findById(id);
         if(!user){
@@ -62,7 +60,7 @@ const checkUser = async(req,res,next) => {
                 message: 'User Not Found'
             })
         }
-        if(id === user_id){
+        if(user_id.toString() === id){
             next();
         } else {
             return res.status(404).json({
@@ -76,23 +74,23 @@ const checkUser = async(req,res,next) => {
     }
 }
 //get check Auth
-const checkAuthUser = async(req,res,next) => {
-    const user_id = userId(req)
-    const ticket = req.params.id
-
+const checkAuthUser = async (req, res, next) => {
+    const user_id = req.user._id;
+    const ticket = req.params.id;
+    // console.log('user_id:', user_id);
+    // console.log('ticket:', ticket);
     try {
-        const tickets = await Ticket.findById(ticket)
-        
-        if(!tickets){
-            return res.status(404).json({message: "Ticket not found"})
-        }
-        if(tickets.user_id != user_id){
-            return res.status(404).json({message: "User ticket not found"})
-        } else {
-            next();
-        }
+      const tickets = await Ticket.findById(ticket);
+      if (!tickets) {
+        return res.status(404).json({ message: 'Ticket not found' });
+      }
+      if (tickets.user_id.toString() !== user_id.toString()) {
+        return res.status(404).json({ message: 'User ticket not found' });
+      } else {
+        next();
+      }
     } catch (error) {
-        return res.status(404).json({message: "Invalid Ticket Id"})
+      return res.status(404).json({ message: 'Invalid Ticket Id' });
     }
-}
-export { protect, admin,userId ,checkUser,checkAuthUser};
+  };
+export { protect, admin ,checkUser,checkAuthUser};

@@ -54,6 +54,22 @@ const ticketValidation =  (req, res, next) => {
         next();
     }
 }
+//bus validation
+const busValidation = (req, res, next) => {
+    const schema = Joi.object({
+        busNumber : Joi.string().required(),
+        busSeats : Joi.number().required(),
+        isSleeper : Joi.boolean()
+    })
+    const { error, value } = schema.validate(req.body);
+    if(error){
+        return res.status(404).json({
+            message: error.message
+        })
+    } else {
+        next();
+    }
+}
 
 const searchValidation = (req, res ,next) => {
     const schema = Joi.object({
@@ -70,7 +86,7 @@ const searchValidation = (req, res ,next) => {
         next();
     }
 }
-const tripValidation = (data) => {
+const tripValidation = (req, res, next) => {
     const schema = Joi.object({
         busNumber : Joi.string().required(),
         availableSeats : Joi.number().required(),
@@ -81,9 +97,16 @@ const tripValidation = (data) => {
         destination : Joi.string().required(),
         price : Joi.number().integer().required()
     });
-    return schema.validate(data)
+    const { error, value } = schema.validate(req.body);
+    if(error){
+        return res.status(400).json({
+            message: error.message
+        })
+    } else {
+        next();
+    }
 }
 
 
 
-export { ticketValidation, searchValidation, tripValidation, loginValidation, registerValidation }
+export { ticketValidation, searchValidation, tripValidation, loginValidation, busValidation,registerValidation }

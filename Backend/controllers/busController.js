@@ -1,28 +1,13 @@
-import { userId } from "../middleWare/authMiddleWare.js";
-import Bus from '../models/busModel.js';
-import {busValidation} from '../middleWare/busMiddleWare.js'
+import {newBus} from '../services/busService.js';
 
 
-
-const addBus = async (user_id, busNumber, busSeats, isSleeper) =>{
-    const newBus = await Bus.create({
-        user_id, busNumber, busSeats, isSleeper
-    });
-    return newBus
-}
 const createBus = async (req, res)=> {
     try {
-        const {busNumber, busSeats, isSleeper} = req.body
-        const { error } = busValidation(req.body)
-        if(error){
-            return res.status(400).json({
-                message: error.message
-            })}
+    const {busNumber, busSeats,isSleeper} = req.body
+        const user_id = req.user._id
+        // console.log(user_id);
 
-
-        const user_id = userId(req)
-
-        const bus = await addBus(user_id, busNumber, busSeats, isSleeper)
+        const bus = await newBus(user_id, busNumber, busSeats, isSleeper)
 
         res.status(200).json({
             user_id: bus.user_id,
@@ -37,4 +22,4 @@ const createBus = async (req, res)=> {
 }
 
 
-export { createBus, addBus }
+export { createBus }

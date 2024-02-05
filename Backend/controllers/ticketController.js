@@ -1,4 +1,3 @@
-import { userId } from "../middleWare/authMiddleWare.js";
 import { UpdateTrip, cancel, checkSeats, createTicket, findTicket, findTrip, getTickets, update } from '../services/ticketService.js';
 
 const BookTrip = async (req, res) => {
@@ -11,7 +10,7 @@ const BookTrip = async (req, res) => {
         if (!trip) {
             return res.status(404).json({ message: 'Trip not found' });
         }
-        const user_id = userId(req)
+        const user_id = req.user
         const busNumber = trip.busNumber;
         const bookingDate = new Date;
         const numberOfSeats = passengers.length;
@@ -81,8 +80,10 @@ const getTicketById = async (req, res) => {
 const getAllTickets = async (req, res) => {
     try {
 
-        const user_id = userId(req)
+        const user_id = req.user
+
         const tickets = await getTickets(user_id)
+        // console.log(tickets);
 
 		if (!tickets.length) {
             return res.status(404).json({ message: 'Tickets not found' });

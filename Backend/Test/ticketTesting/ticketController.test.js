@@ -1,6 +1,6 @@
 import { UpdateTrip, checkSeats, createTicket, findTicket, findTrip, getTickets, cancel, update } from '../../services/ticketService.js';
 import {BookTrip,getTicketById,getAllTickets,   cancelTicket} from '../../controllers/ticketController';
-import { userId } from '../../middleWare/authMiddleWare';
+// import { userId } from '../../middleWare/authMiddleWare';
   
 jest.mock('../../services/ticketService.js', () => ({
     findTrip: jest.fn(),
@@ -13,9 +13,9 @@ jest.mock('../../services/ticketService.js', () => ({
     checkSeats: jest.fn(),
 }));
   
-  jest.mock('../../middleware/authMiddleWare.js', () => ({
-    userId: jest.fn()
-  }));
+  // jest.mock('../../middleware/authMiddleWare.js', () => ({
+  //   userId: jest.fn()
+  // }));
   
   describe('Ticket Controller', () => {
     afterEach(() => {
@@ -166,7 +166,6 @@ jest.mock('../../services/ticketService.js', () => ({
       
         it('Get all tickets for a User', async () => {
           
-          userId.mockResolvedValue('user_id');
       
           const tickets = [
             {
@@ -210,7 +209,6 @@ jest.mock('../../services/ticketService.js', () => ({
           expect(res.json).toHaveBeenCalledWith(tickets);
         });
         it('Tickets Not Found', async() => {
-            userId.mockResolvedValue('user_id');
 
             getTickets.mockResolvedValue([]);
       

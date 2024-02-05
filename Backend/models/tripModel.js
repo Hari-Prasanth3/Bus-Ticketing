@@ -3,10 +3,7 @@ import mongoose from "mongoose";
 
 
 const tripSchema = new mongoose.Schema({
-    // trip_Id: {
-    //     type: String,
-    //     required: true,
-    //  },
+ 
     busNumber: {
         type: String,
         required: true,
@@ -37,10 +34,7 @@ const tripSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    // date: {
-    //     type: Date,
-    //     required: true,
-    // },
+    
     price: {
         type: Number,
         required: true,

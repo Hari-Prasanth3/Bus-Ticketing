@@ -75,7 +75,7 @@ const searchValidation = (req, res ,next) => {
     const schema = Joi.object({
         from : Joi.string().required(),
         to : Joi.string().required(),
-        date : Joi.date().required()
+        date : Joi.date().required().format('YYYY-MM-DD')
     });
     const { error, value } = schema.validate(req.query)
     if(error){
@@ -90,7 +90,7 @@ const tripValidation = (req, res, next) => {
     const schema = Joi.object({
         busNumber : Joi.string().required(),
         availableSeats : Joi.number().required(),
-        date : Joi.date().required(),
+        date : Joi.date().required().format('YYYY-MM-DD'),
         departureTime : Joi.date().format('HH:mm').required(),
         arrivalTime : Joi.date().format('HH:mm').required(),
         origin : Joi.string().required(),

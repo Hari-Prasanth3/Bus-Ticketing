@@ -1,17 +1,28 @@
 import { apiSlice } from "./apiSlice";
-import { TRIPS_URL } from "../constants";
-export const productsApiSlice = apiSlice.injectEndpoints({
+import { TICKETS_URL } from "../constants";
+export const tripsApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-      getProducts: builder.query({
-        query: ({ keyword, pageNumber }) => ({
-          url: TRIPS_URL,
-          params: {
-            keyword,
-            pageNumber,
-          },
+    //   getTrips: builder.query({
+    //     query: ({ from, to, date }) => ({
+    //       url: `${TRIPS_URL}/search?from=${from}&to=${to}&date=${date}`,
+    //     }),
+    //     providesTags: ["Trip"],
+    //     keepUnusedDataFor: 5,
+    //   }),
+    // }),
+    getTicket: builder.query({
+        query: (id) => ({
+          url: `${TICKETS_URL}/${id}`
         }),
-        providesTags: ["Trip"],
         keepUnusedDataFor: 5,
       }),
-    }),
-  })
+    cancel: builder.mutation({
+        query: (id) => ({
+          url: `${TICKETS_URL}/${id}`,
+          method: 'PUT'
+        }),
+        keepUnusedDataFor: 5,
+      }),
+  }),
+})
+  export const {useCancelMutation,useGetTicketQuery}  = tripsApiSlice;

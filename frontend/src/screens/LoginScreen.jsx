@@ -9,6 +9,7 @@ import { setCredentials } from "../slices/authSlice.js";
 import {  toast } from "react-toastify";
 
 const LoginScreen = () => {
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ const LoginScreen = () => {
       const res = await Login({ email, password }).unwrap();
       dispatch(setCredentials({...res}));
       navigate("/SearchScreen");
+      toast.success("SignIn Successfully")
     } catch (err) {
       toast.error(err?.data?.message || err.error)
       

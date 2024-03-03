@@ -36,6 +36,8 @@ export const RegisterScreen = () => {
       const res = await Register({name, email, password }).unwrap();
       dispatch(setCredentials({...res}));
       navigate("/SearchScreen");
+      toast.success("SignIn Successfully")
+
     } catch (err) {
       toast.error(err?.data?.message || err.error)
       

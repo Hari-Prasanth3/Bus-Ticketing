@@ -31,7 +31,7 @@ const BookTrip = async (req, res) => {
         }
         
         // const user_id = req.user._id
-        const ticket = await createTicket(user_id, trip_id, busNumber, bookingDate, passengers, numberOfSeats, date, departureTime, arrivalTime, origin, destination, totalPrice)
+        const ticket = await createTicket(user_id, trip_id, busNumber, bookingDate, passengers, numberOfSeats, date, departureTime, arrivalTime, origin, destination, totalPrice,)
         
         const updateTrip = await UpdateTrip(trip_id, numberOfSeats, seatNumbers);
     
@@ -40,6 +40,7 @@ const BookTrip = async (req, res) => {
         }
 
         res.status(200).json({ 
+            ticket_id : ticket._id,
             user_id : ticket.user_id,
             trip_id : ticket.trip_id,
             busNumber : ticket.busNumber,
@@ -102,6 +103,7 @@ const cancelTicket = async (req, res) => {
 
     try {
         const ticket = await cancel(req.params.id)
+        console.log(ticket);
 
         if(ticket){
             const seatNumbers = ticket.passengers
@@ -113,6 +115,7 @@ const cancelTicket = async (req, res) => {
             }
 
             const trip = await update(ticket.trip_id, ticket.numberOfSeats, seatNo)
+            console.log(trip);
 
             if(!trip) {
             return res.status(404).json({

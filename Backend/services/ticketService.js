@@ -65,6 +65,7 @@ const getTickets = async (id) => {
 
 const cancel = async (id) => {
   const ticket = await Ticket.findById(id);
+  // console.log(ticket);
   return ticket
 }
 

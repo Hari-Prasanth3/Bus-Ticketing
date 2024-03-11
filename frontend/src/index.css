@@ -10,3 +10,12 @@
         @apply absolute rounded-l-full top-52 bg-blue-500;
     }
  }
+ .carousel { position: relative; 
+    height: 300px;
+    width:100%; margin-bottom: 18%; overflow: hidden; }
+
+.carousel img { width: 100%; height: 100%; object-fit: cover; }
+
+.carousel button { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(0, 0, 0, 0.5); color: white; border: none; padding: 10px 20px; cursor: pointer; }
+
+.carousel button:nth-child(3) { right: 0;}

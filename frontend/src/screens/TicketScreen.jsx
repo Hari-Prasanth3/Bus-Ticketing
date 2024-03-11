@@ -147,33 +147,6 @@ const TicketScreen = () => {
     )
         : data ? (
           button ? (
-           
-//             <div className="  flex  bg-gray-200 shadow-md rounded-md p-4 mb-4 sm:h-200px] max-w-100-md">
-// <h1 className="text-2xl">Selected your Seats Here -</h1>
-//               <Card className="m-5 lg:w-75 sm:w-45   p-2">
-                
-//                 {/* <GiCarSeat className='text-xl'/> */}
-//                 <div className="grid grid-cols-3 justify-center">
-//                   {Array.from({ length: number }).map((_, index) => (
-//                     <div
-//                       key={index}
-//                       className={`w-10 h-12 m-3 flex items-center justify-center
-//                                     border-2 border-gray-400 cursor-pointer ${
-//                                       selectedSeats.includes(index)
-//                                         ? "bg-blue-400 border-blue-800"
-//                                         : data.bookedSeats.includes(index + 1)
-//                                         ? "bg-gray-400 opacity-50 pointer-events-none"
-//                                         : "bg-green-400"
-//                                     }`}
-//                       onClick={() => checkboxHandler(index)}
-//                     >
-//                       <input type="checkbox" className="hidden checkbox" />
-//                       <span className="text-xs">S{index + 1}</span>
-//                     </div>
-//                   ))}
-//                 </div>
-              
-              // </Card>
                      
               <div className="flex flex-col items-center">
               <h1 className="text-2xl mb-4">Select your Seats Here</h1>
@@ -208,7 +181,7 @@ const TicketScreen = () => {
             <Container className="w-50  h-50">
               <Card className="w-[50%] h-80">
               
-                <div className="mt-0 h-auto">
+                <div className="mt-4 h-auto w-full">
               <Button className="mt-2 ml-2  bg-blue-500 hover:bg-blue-700 text-white font-bold  rounded" variant="outlined" onClick={() => setButton(true)}>
                 Back
                 </Button>

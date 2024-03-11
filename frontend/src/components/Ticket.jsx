@@ -32,7 +32,7 @@ const Ticket = () => {
   };
 
   return (
-    <div className="mx-auto text-center h-auto p-4  max-w-md">
+    <div className=" text-center h-auto p-4  w-full">
       <h1 className="mb-5 text-4xl font-bold">
         {bookedTicket ? "Ticket Booked" : "Proceed To Pay"}
       </h1>

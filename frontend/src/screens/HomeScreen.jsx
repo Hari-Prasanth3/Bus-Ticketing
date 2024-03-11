@@ -16,14 +16,14 @@ const HomeScreen = () => {
           {/* button */}
           <div  className='flex items-center justify-center w-full space-x-4 lg:justify-start'>
             <Link href="/SearchScreen">
-            <Button className='p-4 text-sm font-semibold text-white bg-blue-600 rounded shadow-md border-2 border-blue-600 md:text-base hover:bg-white hover:text-blue-900'>Get Started</Button>
+            <Button className='p-4 text-sm font-semibold mb-8 text-white bg-blue-600 rounded shadow-md border-2 border-blue-600 md:text-base hover:bg-white hover:text-blue-900'>Get Started</Button>
             </Link></div>
         </div>
         {/* image */}
-        {/* <div className='relative mx-auto lg:mb-0 lg:w-1/2'>
+        <div className='relative mx-auto lg:mb-0 lg:w-1/2'>
            <div className='bg-hero'></div>
        <img src={bus} alt="#" className='relative z-10 lg:top-30 xl:top-0 overflow-x-visible' /> 
-      </div> */}
+      </div>
       </div>
     </section>
     </>

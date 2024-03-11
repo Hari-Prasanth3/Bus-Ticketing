@@ -4,18 +4,17 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
     <>
-    <footer>
-      
-        <div>
-          <div className="text-center py-3  fixed bottom-0 w-full
-           bg-gray-400 backdrop-blur">
+    <footer className="bg-gray-900 text-white fixed bottom-0 w-full py-1">
+    <div className="container mx-auto text-center">
             <p>Bus Ticketing &copy; {currentYear}</p>
-          </div>
+          
         </div>
      
     </footer>
     </>
   );
 };
+
+
 
 export default Footer;

@@ -11,7 +11,10 @@ import HomeScreen from './screens/HomeScreen';
 import SearchScreen from './screens/SearchScreen';
 import LoginScreen from './screens/LoginScreen';
 import  {RegisterScreen}  from './screens/RegisterScreen';
+import PrivateRoute from './components/PrivateRoutes'
 import TicketScreen from './screens/TicketScreen'
+import TicketListScreen from './screens/TicketListScreen'
+import TicketList from './components/TicketList';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
@@ -20,7 +23,14 @@ const router = createBrowserRouter(
       <Route  path="/SearchScreen" element={<SearchScreen />}/>
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/register" element={<RegisterScreen />} />
-      <Route path="/ticket" element={<TicketScreen />} />
+      <Route path="/trip/:id" element={<TicketScreen />} />
+
+
+      <Route path="" element={<PrivateRoute />}>
+      <Route path="/tickets" element={<TicketListScreen />} />
+      <Route path="/ticket/:id" element={<TicketList />} />
+      </Route>
+   
 
 
 

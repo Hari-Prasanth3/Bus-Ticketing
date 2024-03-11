@@ -4,6 +4,8 @@ import { setCredentials } from "../slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import icon from '../assests/icon-removebg.png'
+
 import { Menu, MenuItem } from "@mui/material";
 import { toast } from "react-toastify";
 
@@ -23,8 +25,6 @@ const Header = () => {
 
   //for getTickets button
   const handleGetAllTickets = () => {
-    // dispatch(getAllTickets(userInfo.id));
-
     navigate("/tickets");
   };
 
@@ -40,9 +40,11 @@ const Header = () => {
     };
 
   return (
-    <Navbar className="flex items-center justify-between p-6 backdrop-blur lg:px-8 bg-gray-500  border-none">
+    <>
+    <Navbar className="flex items-center justify-between  backdrop-blur lg:px-8 bg-gray-500 pb-0 w-full rounded-none border-none">
       <Link href="/">
-        <p className="text-rose-800">Bus Ticketing</p>
+        <img src={icon} alt="icon" className=" rounded  bg-fixed h-16"   />
+        
       </Link>
       <div className="flex space-x-4 ">
         {userInfo ? (
@@ -71,12 +73,12 @@ const Header = () => {
             >
               <MenuItem onClick={handleCloseUserMenu}>
                 <Link href="/tickets" underline="none" color="black">
-                  <Button
+                  <p
                     onClick={handleGetAllTickets}
-                    className="inline-block rounded-md p-2 bg-rose-500"
+                    className="inline-block rounded-md p-2"
                   >
                     GetAllTickets
-                  </Button>
+                  </p>
                 </Link>
               </MenuItem>
             </Menu>
@@ -109,6 +111,8 @@ const Header = () => {
         )}
       </div>
     </Navbar>
+  
+     </>
   );
 
 

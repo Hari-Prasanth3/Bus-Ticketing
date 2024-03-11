@@ -44,53 +44,52 @@ const SearchScreen = () => {
 
   return (
     <>
-    <TravelCarousel >
-      <form onSubmit={submitHandler}>
-        <div className="grid grid-cols-4 p-10 m-auto justify-center w-[75%]">
-          <div>
-            <TextField
-              id="filled-basic"
-              label="From"
-              variant="outlined"
-              className="bg-white mt-[8px]"
-              type="text"
-              value={from}
-              onChange={(e) => setFrom(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <TextField
-              id="filled-basic"
-              label="To"
-              variant="outlined"
-              className="bg-white mt-[8px]"
-              type="text"
-              value={to}
-              onChange={(e) => setTo(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <TextField
-              id="filled-basic"
-              variant="outlined"
-              className="bg-white mt-[8px] sm:w-[80px] lg:w-auto"
-              type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              required
-            />
-          </div>
-          <Button
-            className="text-sm font-semibold text-white bg-blue-600 rounded shadow-md border-2 border-blue-600 md:text-base hover:bg-white hover:text-blue-900 mt-2"
+    <div className='flex justify-center'>
+      {/* Hide TravelCarousel for mobile devices */}
+      <div className="hidden lg:block absolute w-full -z-10  h-72  mb-10  "><TravelCarousel/></div>
+      <form className="flex flex-col lg:flex-row shadow-xl   w-auto lg:mt-24 mt-3 justify-center p-5 rounded-lg bg-white" onSubmit={submitHandler}>
+        <TextField
+          id="outlined-required"
+          label="From"
+          variant="outlined"
+          className='mt-[8px] '
+          value={from}
+          onChange={(e) => setFrom(e.target.value)}
+          required
+        />
+        
+        <TextField
+          id="outlined-required"
+          label="To"
+          variant="outlined"
+          className='mt-[8px]'
+          value={to}
+          onChange={(e) => setTo(e.target.value)}
+          required
+        />
+       
+         <TextField 
+          id='outline-required'
+          variant='outlined'
+          className='mt-[8px]'
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          type='date'
+          format="yyyy-mm-dd"
+          required
+        /> 
+       
+        <Button variant="outlined"
+            className="text-sm font-semibold text-white bg-blue-600 rounded shadow-md border-2 border-blue-600 md:text-base hover:bg-white hover:text-blue-900 md:mt-2 mt-0"
             type="submit"
           >
             Search
           </Button>
-        </div>
       </form>
-      </TravelCarousel>
+      {/* <Loader /> */}
+    </div>
+  
+
       {isLoading && <Loader />}
 
       <ul>
@@ -122,14 +121,14 @@ const SearchScreen = () => {
                   </div>
                 </div>
                 <div className="flex justify-between items-center mt-4">
-                  <div className="text-md font-semibold pl-5">
+                  {/* <div className="text-md font-semibold pl-5">
                     Booked Seats:{" "}
                     {trip.bookedSeats
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
                     <br />
                     {trip.availableSeats} Seats Available
-                  </div>
+                  </div> */}
 
                   <div className="flex justify-center text-gray-600 font-semibold float-right">
                     Starting At {trip.price}

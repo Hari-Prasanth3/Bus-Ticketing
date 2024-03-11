@@ -31,7 +31,7 @@ const TravelCarousel = () => {
   }, [currentImage]);
 
   return (
-    <div className="carousel">
+    <div className="carousel ">
       <button onClick={prevImage}>Previous</button>
       <img src={images[currentImage]} alt="" />
       <button onClick={nextImage}>Next</button>

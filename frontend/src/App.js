@@ -14,7 +14,7 @@ function App() {
        <img src={background} alt='bgImage' className='fixed w-full -z-10 h-full'/>
 
       <Header/>
-      <main className='py-3'>
+      <main className=''>
         <Container>
         <Outlet />
         </Container>

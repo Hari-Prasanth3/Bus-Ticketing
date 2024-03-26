@@ -16,6 +16,8 @@
   "license": "ISC",
   "dependencies": {
     "@hapi/joi-date": "^2.0.1",
+    "@headlessui/react": "^1.7.18",
+    "@heroicons/react": "^2.1.1",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.3.1",
@@ -24,7 +26,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.3",
-    "react": "^18.2.0"
+    "prop-types": "^15.8.1",
+    "react-slick": "^0.30.2"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.23.8",

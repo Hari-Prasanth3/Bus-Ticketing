@@ -22,7 +22,7 @@ const HomeScreen = () => {
         {/* image */}
         <div className='relative mx-auto lg:mb-0 lg:w-1/2'>
            <div className='bg-hero'></div>
-       <img src={bus} alt="#" className='relative z-10 lg:top-30 xl:top-0 overflow-x-visible' /> 
+       <img src={bus} alt="#" className='relative z-10 lg:top-30 xl:top-0 overflow-x-visible ' /> 
       </div>
       </div>
     </section>

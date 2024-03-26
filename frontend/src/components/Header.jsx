@@ -95,7 +95,7 @@ const Header = () => {
               href="/login"
               variant="text"
               size="sm"
-              className="inline-block  rounded-md p-2 bg-rose-500 "
+              className="inline-block  rounded-md p-2 text-white bg-rose-500 "
             >
               <span>Sign In</span>
             </Link>
@@ -103,7 +103,7 @@ const Header = () => {
               href="/register"
               variant="text"
               size="sm"
-              className="inline-block rounded-md p-2 bg-rose-500 "
+              className="inline-block rounded-md p-2 text-white bg-rose-500 "
             >
               <span>Sign Up</span>
             </Link>

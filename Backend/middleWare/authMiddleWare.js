@@ -32,22 +32,7 @@ const admin = (req, res, next) => {
         })
     }
 };
-// Get user Id
-// const userId = (req) => {
-//     const token = req.cookies.jwt;
 
-//     if (!token) {
-//         return null;
-//     }
-
-//     try {
-//         const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-//         return decodedToken.userId;
-//     } catch (error) {
-//         console.log('Error verifying JWT:', error);
-//         return null;
-//     }
-// };
 // Get User
 const checkUser = async(req,res,next) => {
     const user_id = req.user._id

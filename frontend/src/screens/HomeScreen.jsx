@@ -7,6 +7,7 @@ const HomeScreen = () => {
   return (
     <>
      <section>
+      
       <div className='container flex flex-col-reverse mx-auto py-6 lg:flex-row lg:mb-0'>
         <div className='flex flex-col space-y-10 lg:mt-16 lg:w-1/2'>
           <h1 className='text-3xl font-semibold text-center lg:text-6xl lg:text-left'>Convenient Bus Tickets</h1>

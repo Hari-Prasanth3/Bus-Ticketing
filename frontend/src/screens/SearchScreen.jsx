@@ -44,9 +44,9 @@ const SearchScreen = () => {
 
   return (
     <>
-    <div className='flex justify-center'>
+    <div className='flex justify-center '>
       {/* Hide TravelCarousel for mobile devices */}
-      <div className="hidden lg:block absolute w-full -z-10  h-72  mb-10  "><TravelCarousel/></div>
+      <div className="hidden lg:block absolute w-full -z-10  h-70%  mb-10  "><TravelCarousel/></div>
       <form className="flex flex-col lg:flex-row shadow-xl   w-auto lg:mt-24 mt-3 justify-center p-5 rounded-lg bg-white" onSubmit={submitHandler}>
         <TextField
           id="outlined-required"
